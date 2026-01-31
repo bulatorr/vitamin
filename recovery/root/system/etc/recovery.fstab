@@ -1,23 +1,27 @@
-# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6983/fstab.in.mt6983"
+# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6895/fstab.in.mt6895"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 341 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
-# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6983/fstab.in.mt6983" 2
-# 148 "vendor/mediatek/proprietary/hardware/fstab/mt6983/fstab.in.mt6983"
+# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6895/fstab.in.mt6895" 2
+# 148 "vendor/mediatek/proprietary/hardware/fstab/mt6895/fstab.in.mt6895"
 system /system ext4 ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
 system /system erofs ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
 vendor /vendor ext4 ro wait,slotselect,avb,logical,first_stage_mount
 vendor /vendor erofs ro wait,slotselect,avb,logical,first_stage_mount
 product /product ext4 ro wait,slotselect,avb,logical,first_stage_mount
 product /product erofs ro wait,slotselect,avb,logical,first_stage_mount
+system_ext /system_ext ext4 ro wait,slotselect,avb,logical,first_stage_mount
+system_ext /system_ext erofs ro wait,slotselect,avb,logical,first_stage_mount
 odm /odm ext4 ro wait,logical,slotselect,first_stage_mount,nofail
-odm /odm erofs ro wait,logical,slotselect,first_stage_mount,nofail
+odm /odm erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_product /my_product ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
 my_product /my_product erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_engineering /my_engineering ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
 my_engineering /my_engineering erofs ro wait,slotselect,logical,first_stage_mount,nofail
+my_company /my_company ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
+my_company /my_company erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_carrier /my_carrier ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
 my_carrier /my_carrier erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_region /my_region ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
@@ -26,6 +30,8 @@ my_heytap /my_heytap ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount
 my_heytap /my_heytap erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_stock /my_stock ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
 my_stock /my_stock erofs ro wait,slotselect,logical,first_stage_mount,nofail
+my_preload /my_preload ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
+my_preload /my_preload erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_bigball /my_bigball ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
 my_bigball /my_bigball erofs ro wait,slotselect,logical,first_stage_mount,nofail
 my_manifest /my_manifest ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
@@ -34,7 +40,7 @@ my_manifest /my_manifest erofs ro wait,slotselect,logical,first_stage_mount,nofa
 /dev/block/by-name/cdt_engineering /cdt_engineering emmc defaults defaults
 /dev/block/by-name/vbmeta_vendor /vbmeta_vendor emmc defaults first_stage_mount,nofail,slotselect
 /dev/block/by-name/vbmeta_system /vbmeta_system emmc defaults first_stage_mount,nofail,slotselect,avb=vbmeta
-
+# 130 "vendor/mediatek/proprietary/hardware/fstab/mt6779/fstab.in"
 /dev/block/by-name/oplusreserve2 /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable,first_stage_mount
 
 #/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v1
@@ -122,10 +128,10 @@ my_manifest /my_manifest erofs ro wait,slotselect,logical,first_stage_mount,nofa
 
 
 /dev/block/by-name/otp /otp emmc defaults defaults
-#/dev/block/by-name/odm /custom ext4 ro wait,verify,recoveryonly
+/dev/block/by-name/odm /custom ext4 ro wait,verify,recoveryonly
 /dev/block/mmcblk0p1 /external_sd vfat  nosuid,nodev defaults
 /dev/block/sdd1 /usb_otg vfat nosuid,nodev defaults
 /dev/block/by-name/vbmeta /vbmeta emmc defaults defaults
 #Yang.Li@PSW.AD.Recovery.1122242, 2018/03/22, Add for critical log in mtk platform
-#/dev/block/by-name/reserve2            /reserve2       emmc    defaults                                                      defaults
-#/dev/block/by-name/oplusreserve2                            /opporeserve    ext4    rw,seclabel,nosuid,nodev,noatime,data=ordered                 wait
+/dev/block/by-name/reserve2            /reserve2       emmc    defaults                                                      defaults
+/dev/block/by-name/oplusreserve2                            /opporeserve    ext4    rw,seclabel,nosuid,nodev,noatime,data=ordered                 wait
