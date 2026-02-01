@@ -66,10 +66,6 @@ PRODUCT_PACKAGES += \
     android.hardware.security.secureclock \
     android.hardware.security.sharedsecret
 
-# Keystore2
-PRODUCT_PACKAGES += \
-    android.system.keystore2
-
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := current
 
